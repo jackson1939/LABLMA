@@ -104,6 +104,18 @@ while (`$true) {
     Write-Log "LocalTunnel: ejecutandose en segundo plano (sin ventanas)"
 }
 
+# ─── Auto-sync GitHub bidireccional ───
+Write-Log "Iniciando auto-sync GitHub..."
+$autoSyncScript = "$root\scripts\auto-sync.ps1"
+if (Test-Path $autoSyncScript) {
+    $syncLog = "$logDir\auto-sync.log"
+    Start-Process -PassThru -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$autoSyncScript`" -Interval 60" -WindowStyle Hidden
+    Start-Sleep -Seconds 2
+    Write-Log "Auto-sync GitHub iniciado"
+} else {
+    Write-Log "auto-sync.ps1 no encontrado, se omite"
+}
+
 # ─── Auto-deploy monitor ───
 Write-Log "Iniciando auto-deploy monitor..."
 $monitorLog = "$logDir\monitor.log"
@@ -126,7 +138,7 @@ while (`$true) {
         `$local = & git -C `$root rev-parse HEAD 2>`$null
         `$remote = & git -C `$root rev-parse origin/main 2>`$null
         if (`$local -and `$remote -and `$local -ne `$remote) {
-            "[`$(Get-Date -Format 'HH:mm:ss')] Nuevos cambios. Actualizando..." | Out-File -FilePath "$logDir\server.log" -Append
+            "[`$(Get-Date -Format 'HH:mm:ss')] Nuevos cambios remotos. Actualizando..." | Out-File -FilePath "$logDir\server.log" -Append
             & git -C `$root pull origin main 2>&1 | Out-Null
             & git -C `$root diff HEAD@{1} HEAD --name-only 2>`$null | Select-String "requirements.txt" | Out-Null
             if (`$?) { & `$venv -m pip install -r "$beDir\requirements.txt" -q 2>&1 | Out-Null }
