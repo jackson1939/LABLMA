@@ -1,272 +1,384 @@
-# LABLMA — SGC · Sistema de Gestión de Calidad
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F766E,100:2563EB&height=220&section=header&text=LABLMA&fontSize=72&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Sistema%20de%20Gesti%C3%B3n%20de%20Calidad%20%C2%B7%20ISO%209001%20%2F%2017025%20%2F%2014001%20%2F%2045001&descAlignY=58&descSize=18" width="100%" alt="LABLMA banner"/>
+</p>
 
-**Plataforma integral open-source para gestionar Sistemas de Gestión de Calidad bajo ISO 9001, ISO 17025, ISO 14001 e ISO 45001.**
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=2800&pause=900&color=2563EB&center=true&vCenter=true&width=780&lines=Control+documental+con+flujo+de+aprobaci%C3%B3n+auditable;No+conformidades+con+m%C3%A1quina+de+estados;Matriz+de+riesgos+probabilidad+%C3%97+impacto;Dashboard+ejecutivo+con+KPIs+en+tiempo+real;En+producci%C3%B3n+real+en+lablma.com" alt="Typing SVG"/>
+</p>
 
-Documentos controlados, no conformidades, riesgos, planes de acción, dashboard con KPIs y notificaciones multicanal — todo en una sola aplicación web, pensada para PYMES, laboratorios y organismos de certificación que necesitan un SGC robusto sin pagar licencias SaaS.
+<p align="center">
+  <img src="https://img.shields.io/badge/frontend-Next.js_14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"/>
+  <img src="https://img.shields.io/badge/backend-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
+  <img src="https://img.shields.io/badge/base%20de%20datos-PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/ISO-9001_%C2%B7_17025_%C2%B7_14001_%C2%B7_45001-0F766E?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/estado-producci%C3%B3n%20activa-success?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/licencia-todos%20los%20derechos%20reservados-red?style=for-the-badge"/>
+</p>
 
-🌐 **Idioma / Language:** [Español](#español) | [English](#english)
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=nextjs,react,typescript,tailwind,fastapi,python,postgres,docker,vscode&theme=dark" alt="stack icons"/>
+</p>
+
+<p align="center">
+  <a href="#español"><b>🇪🇸 Español</b></a> &nbsp;·&nbsp; <a href="#english"><b>🇬🇧 English</b></a>
+</p>
 
 ---
 
 <a name="español"></a>
+## 🇪🇸 Español
 
-## Español
+### 📑 Tabla de contenidos
 
-### Índice
-
-- [Descripción general](#descripción-general)
+- [¿Qué es LABLMA?](#qué-es-lablma)
+- [Arquitectura](#arquitectura)
+- [Flujo de aprobación de un documento](#flujo-de-aprobación-de-un-documento)
+- [Modelo de datos](#modelo-de-datos)
 - [Características principales](#características-principales)
 - [Stack tecnológico](#stack-tecnológico)
-- [Arquitectura](#arquitectura)
 - [Estructura del proyecto](#estructura-del-proyecto)
-- [Requisitos previos](#requisitos-previos)
-- [Instalación y configuración](#instalación-y-configuración)
-- [Uso](#uso)
 - [API REST](#api-rest)
-- [Despliegue en producción](#despliegue-en-producción)
-- [Docker](#docker)
-- [Variables de entorno](#variables-de-entorno)
+- [Infraestructura de producción](#infraestructura-de-producción)
 - [Estado del proyecto y roadmap](#estado-del-proyecto-y-roadmap)
 - [Licencia](#licencia)
-- [Autor / Contacto](#autor--contacto)
+- [Autor](#autor)
 
 ---
 
-### Descripción general
+### ¿Qué es LABLMA?
 
-**LABLMA (SGC)** es un sistema de gestión de calidad web full-stack que digitaliza los procesos que exigen normas como ISO 9001, ISO 17025, ISO 14001 e ISO 45001: control documental, gestión de no conformidades, análisis de riesgos, planes de acción y programas, y reporting ejecutivo mediante un dashboard con KPIs en tiempo real.
+**LABLMA** es un Sistema de Gestión de Calidad (SGC) web full-stack que digitaliza, de punta a punta, los procesos que exigen las normas **ISO 9001** (gestión de calidad), **ISO 17025** (competencia de laboratorios de ensayo y calibración), **ISO 14001** (gestión ambiental) e **ISO 45001** (seguridad y salud en el trabajo).
 
-Está orientado a organizaciones que hoy gestionan su SGC en hojas de cálculo o carpetas compartidas — PYMES, laboratorios de ensayo/calibración y organismos de certificación — y necesitan trazabilidad, control de versiones y flujos de aprobación auditable, sin el costo recurrente de una suite SaaS de calidad.
+En la mayoría de las PYMES, laboratorios de ensayo/calibración y organismos de certificación, el SGC vive repartido en carpetas compartidas, hojas de cálculo y correos sueltos: listas maestras de documentos en Excel, no conformidades registradas en Word, matrices de riesgo que nadie actualiza y planes de acción sin trazabilidad de quién aprobó qué y cuándo. Eso es exactamente lo que rompe cualquier auditoría externa seria.
 
-El proyecto incluye, además de la aplicación, un **stack de infraestructura propio** (scripts de PowerShell) para desplegar y mantener el sistema corriendo de forma autónoma en un servidor Windows local, con auto-deploy desde GitHub y acceso externo vía Cloudflare Tunnel — pensado para organizaciones sin equipo de DevOps dedicado.
+LABLMA reemplaza ese archipiélago de archivos por una única aplicación con:
 
-### Características principales
+- **Trazabilidad real** — cada documento, no conformidad, riesgo y plan queda vinculado a un usuario, un rol y una marca de tiempo, con historial de versiones y de cambios de estado.
+- **Flujos de aprobación auditable** — nada pasa de borrador a vigente sin pasar por los roles correspondientes; queda registrado quién aprobó, quién rechazó y por qué.
+- **Reporting ejecutivo en vivo** — un dashboard con KPIs, gráficos y alertas de vencimiento, en lugar de un informe manual mensual armado a mano.
+- **Notificaciones multicanal** — el sistema avisa solo, por dentro de la app, por email y por WhatsApp, cuando algo requiere atención.
 
-- **Gestión documental** con ciclo de vida completo: `borrador → en_revisión → vigente → obsoleto`. Incluye control de versiones, lista maestra de documentos, editor WYSIWYG (TipTap) con autoguardado, historial de cambios y flujo de aprobación multi-rol.
-- **No conformidades (NC)** con máquina de estados: `abierta → en_análisis → plan_aprobado → en_ejecución → cerrada / vencida`. Acciones correctivas vinculadas y alertas automáticas de vencimiento.
-- **Gestión de riesgos** mediante matriz probabilidad (1-5) × impacto (1-5) = nivel (1-25), con mapa de calor visual, planes de tratamiento y clasificación automática por nivel de criticidad.
-- **Planes y programas** anuales vinculados a norma ISO y año fiscal, con diagrama tipo Gantt (tareas, responsables, fechas, progreso 0-100%) y aprobación multi-rol.
-- **Dashboard ejecutivo** con KPIs en tiempo real, gráficos de torta (NC por tipo) y barras (documentos por estado), alertas de próximos vencimientos y auto-refresh.
-- **Notificaciones multicanal**: in-app (campana con contador), email (SMTP vía `fastapi-mail`) y WhatsApp (Meta Cloud API) — se disparan al asignar una NC, aprobar documentos o ante vencimientos próximos.
-- **Usuarios y roles**: 6 roles con matriz de permisos granular (`admin`, `director`, `responsable`, `verificador`, `elaborador`, `consultor`), con CRUD de usuarios restringido a administradores.
-- **Generación de PDF** de documentos y reportes mediante WeasyPrint + Jinja2.
-- **Tareas programadas** (recordatorios de vencimiento, limpieza, etc.) con APScheduler, ejecutables también vía endpoint protegido para cron externos (p. ej. Vercel Cron).
-- **Infraestructura autogestionada**: wizard de instalación en un solo comando, servicio de Windows con arranque automático, monitor de salud con auto-restart, auto-deploy al hacer `git push`, y túnel Cloudflare para exponer el sistema a internet sin abrir puertos en el router.
-
-#### Estados de negocio
-
-```
-Documento:     borrador → en_revision → vigente → obsoleto
-No conformidad: abierta → en_analisis → plan_aprobado → en_ejecucion → cerrada / vencida
-Plan de acción: pendiente → en_curso → completada
-Riesgo:         activo → mitigado → aceptado
-Plan/Programa:  borrador → aprobado → en_ejecucion → completado
-```
-
-### Stack tecnológico
-
-| Capa | Tecnología | Versión |
-|------|-----------|---------|
-| **Frontend** | Next.js (App Router) + TypeScript | 14.2 / 5.4 |
-| **Estilos** | Tailwind CSS + class-variance-authority | 3.4 |
-| **Editor de texto enriquecido** | TipTap (extensiones de tabla, imagen, links, etc.) | 3.27 |
-| **Gráficos** | Recharts | 2.12 |
-| **Iconos** | Lucide React | 0.378 |
-| **Cliente HTTP (frontend)** | Axios | 1.7 |
-| **Backend** | FastAPI + Python | 0.111 / 3.12 |
-| **ORM** | SQLAlchemy 2.0 (async) + Alembic (migraciones) | 2.0 / 1.13 |
-| **Validación** | Pydantic + Pydantic Settings | 2.7 / 2.3 |
-| **Base de datos** | PostgreSQL 15 (producción) / SQLite + aiosqlite (desarrollo) | |
-| **Autenticación** | JWT (HS256) vía `python-jose` + `bcrypt`/`passlib` | expiración configurable (default 8h) |
-| **Generación de PDF** | WeasyPrint + Jinja2 | |
-| **Notificaciones** | SMTP (`fastapi-mail`) + WhatsApp Cloud API (Meta) | |
-| **Cliente HTTP (backend)** | httpx | |
-| **Tareas programadas** | APScheduler | 3.10 |
-| **Contenedores** | Docker + Docker Compose | |
-| **Infraestructura** | Scripts PowerShell (setup, deploy, sync, monitor, tunnel) + cloudflared + Windows Service | |
+No es un producto genérico de gestión de proyectos con la etiqueta "calidad" pegada encima: los estados de negocio, los roles, las normas soportadas y las plantillas de notificación están modelados específicamente sobre el ciclo de vida que exige un SGC certificable. Y no es un prototipo de portfolio — **corre en producción real** en `lablma.com`, sobre infraestructura propia con auto-deploy, sirviendo a una organización que hoy gestiona su calidad ahí en vivo.
 
 ### Arquitectura
 
-```
-┌────────────────────────────────────────────────────────┐
-│                    NAVEGADOR                            │
-│           http://localhost:3000 / https://lablma.com    │
-└─────────────────────┬──────────────────────────────────┘
-                       │  /api/* → proxy (mismo origen)
-                       │  / → React Server Components
-┌─────────────────────▼──────────────────────────────────┐
-│              NEXT.JS (App Router)                       │
-│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐   │
-│  │ Páginas      │  │ API Rewrites │  │ Static Assets │   │
-│  │ + RSC        │  │ /api/* → BE  │  │               │   │
-│  └─────────────┘  └──────┬───────┘  └──────────────┘   │
-└──────────────────────────┼──────────────────────────────┘
-                            │  proxy (server-side)
-┌──────────────────────────▼──────────────────────────────┐
-│              FASTAPI (Backend)                           │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │
-│  │ Auth     │ │ Doc.     │ │ NC       │ │ Riesgos  │    │
-│  │ /auth    │ │ /docs.   │ │ /nc      │ │ /riesgos │    │
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │
-│  │ Planes   │ │ Dashboard│ │ Notif.   │ │ Scheduler│    │
-│  │ /planes  │ │ /kpis    │ │ /notif   │ │ APSch.   │    │
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
-└──────────────────────┬────────────────────────────────┘
-                        │  SQLAlchemy async
-┌──────────────────────▼────────────────────────────────┐
-│              BASE DE DATOS                              │
-│         SQLite (dev) / PostgreSQL 15 (prod)             │
-└──────────────────────────────────────────────────────────┘
+LABLMA sigue una arquitectura de tres capas clásica, con **Next.js** como frontend que también actúa de proxy hacia la API, un backend **FastAPI** modular por dominio de negocio, y **PostgreSQL** como base de datos productiva (con SQLite como alternativa liviana para desarrollo). El sistema de notificaciones y el scheduler de tareas viven dentro del propio backend, sin colas ni brokers externos.
+
+```mermaid
+graph TB
+    subgraph Cliente["🌐 Cliente"]
+        Browser["Navegador<br/>lablma.com"]
+    end
+
+    subgraph Frontend["▲ Next.js · App Router"]
+        Pages["Páginas + React<br/>Server Components"]
+        Rewrites["API Rewrites<br/>/api/* → backend"]
+        Static["Static Assets"]
+    end
+
+    subgraph Backend["⚡ FastAPI · /api/v1"]
+        Auth["Auth<br/>JWT · roles"]
+        Docs["Documentos<br/>versionado + PDF"]
+        NC["No Conformidades<br/>máquina de estados"]
+        Risk["Riesgos<br/>matriz P×I"]
+        Plans["Planes / Programas<br/>Gantt"]
+        Dash["Dashboard<br/>KPIs"]
+        Notif["Notificaciones<br/>in-app · email · WhatsApp"]
+        Sched["Scheduler<br/>APScheduler"]
+    end
+
+    subgraph Data["💾 Persistencia"]
+        PG[("PostgreSQL 15<br/>producción")]
+        SQLite[("SQLite<br/>desarrollo")]
+    end
+
+    subgraph External["📡 Servicios externos"]
+        SMTP["SMTP<br/>fastapi-mail"]
+        WA["WhatsApp<br/>Meta Cloud API"]
+        Cron["Cron externo<br/>ej. Vercel Cron"]
+    end
+
+    Browser -->|HTTPS| Pages
+    Pages --> Rewrites
+    Browser --> Static
+    Rewrites -->|proxy server-side| Auth
+
+    Auth --- Docs
+    Auth --- NC
+    Auth --- Risk
+    Auth --- Plans
+    Auth --- Dash
+    Auth --- Notif
+    Auth --- Sched
+
+    Docs -->|SQLAlchemy async| PG
+    NC --> PG
+    Risk --> PG
+    Plans --> PG
+    Dash --> PG
+    Notif --> PG
+    PG -.dev.-> SQLite
+
+    Notif --> SMTP
+    Notif --> WA
+    Cron -->|GET protegido con cron_secret| Sched
+    Sched --> PG
+
+    style Frontend fill:#2563EB22,stroke:#2563EB
+    style Backend fill:#0F766E22,stroke:#0F766E
+    style Data fill:#f59e0b22,stroke:#f59e0b
+    style External fill:#94a3b822,stroke:#64748b
 ```
 
-**Infraestructura de producción (servidor Windows local):**
+> El frontend nunca llama directo a `lablma-api` desde el navegador: todas las peticiones pasan por `/api/*` en Next.js, que actúa de proxy server-side hacia FastAPI. Esto evita exponer el backend en un dominio/puerto distinto y simplifica CORS y cookies de sesión.
+
+**Infraestructura de producción (servidor propio, sin PaaS):**
+
+```mermaid
+graph LR
+    subgraph Server["🖥️ Servidor Windows dedicado"]
+        BE["Backend FastAPI<br/>:8000"]
+        FE["Frontend Next.js<br/>:3000"]
+        Monitor["Monitor<br/>health-check + git poller"]
+        Svc["Windows Service<br/>SGC-Server · auto-start"]
+        Svc --- BE
+        Svc --- FE
+        Monitor -.supervisa.-> BE
+        Monitor -.supervisa.-> FE
+    end
+
+    subgraph Net["Acceso"]
+        LAN["Red LAN<br/>192.168.x.x"]
+        Tunnel["Cloudflare Tunnel<br/>sin puertos abiertos"]
+    end
+
+    GH["GitHub<br/>git push a main"] -->|detecta cambio| Monitor
+    Monitor -->|git pull + migrate + build + restart| BE
+    Monitor --> FE
+
+    LAN --> Server
+    Internet(("🌍 Internet<br/>lablma.com")) --> Tunnel --> Server
+
+    style Server fill:#0F766E22,stroke:#0F766E
+    style Net fill:#2563EB22,stroke:#2563EB
+```
+
+### Flujo de aprobación de un documento
+
+El corazón del control documental es este ciclo de vida: nada llega a `vigente` sin pasar por revisión y aprobación explícita, y cada transición queda registrada en el historial del documento.
+
+```mermaid
+sequenceDiagram
+    actor E as Elaborador
+    participant Sys as LABLMA
+    actor V as Verificador
+    actor D as Director
+    actor Todos as Usuarios (lectura)
+
+    E->>Sys: Crea documento (estado = borrador)
+    Sys->>Sys: Guarda versión 1 + autoguardado (TipTap)
+    E->>Sys: POST /{id}/enviar-revision
+    Sys->>Sys: estado = en_revision
+    Sys-->>V: Notificación in-app + email
+
+    alt Aprobado
+        V->>Sys: POST /{id}/aprobar
+        Sys->>Sys: estado = vigente
+        Sys->>Sys: Registra versión, autor y fecha en historial
+        Sys-->>Todos: Documento visible en lista maestra
+    else Rechazado
+        V->>Sys: POST /{id}/rechazar (con motivo)
+        Sys->>Sys: estado = borrador
+        Sys-->>E: Notificación de rechazo + motivo
+        E->>Sys: Corrige y reenvía a revisión
+    end
+
+    D->>Sys: POST /{id}/dar-de-baja (cuando corresponde)
+    Sys->>Sys: estado = obsoleto
+    Sys-->>Todos: Documento retirado de la lista vigente, versión histórica preservada
+```
+
+### Modelo de datos
+
+El dominio se apoya en 10 modelos SQLAlchemy. El siguiente diagrama resume las entidades centrales y sus relaciones:
+
+```mermaid
+erDiagram
+    USUARIO ||--o{ DOCUMENTO : "elabora / aprueba"
+    USUARIO ||--o{ NO_CONFORMIDAD : "reporta / analiza"
+    USUARIO ||--o{ PLAN_PROGRAMA : "aprueba"
+
+    DOCUMENTO ||--o{ VERSION_DOCUMENTO : "tiene versiones"
+    DOCUMENTO ||--o{ HISTORIAL_DOCUMENTO : "registra cambios"
+
+    NO_CONFORMIDAD ||--o{ PLAN_ACCION : "genera"
+
+    PLAN_PROGRAMA ||--o{ TAREA_PLAN : "compuesto de"
+
+    RIESGO {
+        int id PK
+        string descripcion
+        int probabilidad "1-5"
+        int impacto "1-5"
+        int nivel "probabilidad x impacto, 1-25"
+        string estado "activo / mitigado / aceptado"
+    }
+
+    DOCUMENTO {
+        int id PK
+        string codigo
+        string titulo
+        string norma_iso
+        string estado "borrador / en_revision / vigente / obsoleto"
+        int elaborado_por FK
+        int aprobado_por FK
+    }
+
+    NO_CONFORMIDAD {
+        int id PK
+        string descripcion
+        string estado "abierta / en_analisis / plan_aprobado / en_ejecucion / cerrada / vencida"
+        date fecha_vencimiento
+    }
+
+    PLAN_PROGRAMA {
+        int id PK
+        string norma_iso
+        int anio_fiscal
+        string estado "borrador / aprobado / en_ejecucion / completado"
+    }
+
+    NOTIFICACION {
+        int id PK
+        int usuario_id FK
+        string canal "in_app / email / whatsapp"
+        boolean leida
+    }
+```
+
+> Esquema simplificado a partir de `backend/app/models/`. Los estados de cada entidad son los reales del código (ver máquinas de estado abajo), no una aproximación genérica.
+
+#### Máquinas de estado de negocio
 
 ```
-┌──────────────────────────────────────────────────┐
-│  SERVIDOR (Windows)                               │
-│                                                    │
-│  ┌────────┐  ┌────────┐  ┌──────────┐  ┌──────┐  │
-│  │Backend │  │Frontend│  │ Monitor  │  │Tunnel│  │
-│  │:8000   │  │:3000   │  │health+git│  │CF    │  │
-│  └────────┘  └────────┘  └──────────┘  └──────┘  │
-│                                                    │
-│  ┌──────────────────────────────────────────────┐ │
-│  │ Windows Service (SGC-Server, arranque auto)   │ │
-│  └──────────────────────────────────────────────┘ │
-└──────────────────┬───────────────────────────────┘
-                    │
-      ┌─────────────┴──────────────┐
-      │  LAN            │ Internet │
-      │  192.168.x.x    │  túnel   │
-      │  WiFi           │  CF      │
-      └─────────────────────────────┘
+Documento:       borrador → en_revision → vigente → obsoleto
+No conformidad:  abierta → en_analisis → plan_aprobado → en_ejecucion → cerrada / vencida
+Plan de acción:  pendiente → en_curso → completada
+Riesgo:          activo → mitigado → aceptado
+Plan/Programa:   borrador → aprobado → en_ejecucion → completado
 ```
+
+### Características principales
+
+**📄 Control documental**
+- Ciclo de vida completo `borrador → en_revisión → vigente → obsoleto`, con lista maestra de documentos y código/norma ISO asociada.
+- Editor WYSIWYG (**TipTap**) con tablas, imágenes, links, autoguardado e historial de cambios.
+- Control de versiones: cada aprobación genera una nueva versión trazable, con autor y fecha.
+- Flujo de aprobación **multi-rol**: envío a revisión, aprobación, rechazo con motivo, y baja a obsoleto.
+- Generación de **PDF** de documentos y reportes mediante WeasyPrint + plantillas Jinja2.
+
+**⚠️ No conformidades (NC)**
+- Máquina de estados `abierta → en_análisis → plan_aprobado → en_ejecución → cerrada / vencida`.
+- Acciones correctivas vinculadas (`planes_accion`), con seguimiento independiente de progreso.
+- Alertas automáticas de vencimiento disparadas por el scheduler.
+
+**📊 Matriz de riesgos**
+- Evaluación **probabilidad (1-5) × impacto (1-5) = nivel (1-25)**.
+- Mapa de calor visual para priorización inmediata.
+- Planes de tratamiento y clasificación automática por criticidad.
+
+**🗓️ Planes y programas**
+- Vinculados a norma ISO específica y año fiscal.
+- Vista tipo **Gantt**: tareas, responsables, fechas y progreso 0-100%.
+- Aprobación multi-rol antes de pasar a ejecución.
+
+**📈 Dashboard ejecutivo**
+- KPIs en tiempo real, gráficos de torta (NC por tipo) y de barras (documentos por estado) con **Recharts**.
+- Alertas de próximos vencimientos y auto-refresh sin intervención manual.
+
+**🔔 Notificaciones multicanal**
+- **In-app**: campana con contador de no leídas.
+- **Email**: SMTP vía `fastapi-mail`.
+- **WhatsApp**: Meta Cloud API, con plantillas dedicadas para NC y documentos.
+- Se disparan automáticamente al asignar una NC, aprobar un documento o ante vencimientos próximos.
+
+**👥 Usuarios y roles**
+- 6 roles con matriz de permisos granular: `admin`, `director`, `responsable`, `verificador`, `elaborador`, `consultor`.
+- CRUD de usuarios restringido a administradores.
+- Jerarquía de roles: `admin` > `director` > `responsable` > `verificador` > `elaborador` > `consultor`.
+
+**⏱️ Automatización**
+- Tareas programadas (recordatorios de vencimiento, limpieza) con **APScheduler**.
+- Endpoint protegido (`cron_secret`) para disparar el scheduler desde un cron externo (p. ej. Vercel Cron), útil cuando el proceso Python no corre 24/7 en el mismo host.
+
+**🖥️ Infraestructura autogestionada**
+- Stack propio en PowerShell: wizard de instalación, servicio de Windows con arranque automático, monitor de salud con auto-restart.
+- **Auto-deploy**: al hacer `git push`, un monitor en el servidor detecta el cambio, hace `git pull`, corre migraciones, reconstruye el frontend y reinicia los servicios — sin intervención manual.
+- **Cloudflare Tunnel** para exponer el sistema a internet sin abrir puertos en el router.
+
+### Stack tecnológico
+
+| Capa | Tecnología | Detalle |
+|---|---|---|
+| 🎨 Frontend | **Next.js 14** (App Router) + **TypeScript** | React Server Components, rutas agrupadas `(auth)` / `(dashboard)` |
+| 💅 Estilos | **Tailwind CSS** + class-variance-authority | Sistema de diseño utilitario |
+| ✏️ Editor enriquecido | **TipTap** | Tablas, imágenes, links, autoguardado |
+| 📊 Gráficos | **Recharts** | Torta y barras en el dashboard |
+| 🎯 Iconos | Lucide React | Set de iconos consistente |
+| 🌐 HTTP (frontend) | Axios | Cliente hacia `/api/v1` |
+| ⚡ Backend | **FastAPI** + **Python 3.12** | API async bajo `/api/v1` |
+| 🗃️ ORM | **SQLAlchemy 2.0** (async) + **Alembic** | Migraciones versionadas |
+| ✅ Validación | **Pydantic** + Pydantic Settings | Esquemas request/response |
+| 🐘 Base de datos | **PostgreSQL 15** (producción) / SQLite + aiosqlite (desarrollo) | — |
+| 🔐 Autenticación | **JWT (HS256)** vía `python-jose` + `bcrypt`/`passlib` | Expiración configurable (default 8h) |
+| 📑 PDF | **WeasyPrint** + Jinja2 | Documentos y reportes |
+| 📬 Notificaciones | SMTP (`fastapi-mail`) + **WhatsApp Cloud API** (Meta) | Multicanal |
+| 🌐 HTTP (backend) | httpx | Llamadas salientes |
+| ⏰ Tareas programadas | **APScheduler** | Recordatorios y limpieza |
+| 🐳 Contenedores | Docker + Docker Compose | Alternativa Linux/dev |
+| 🛠️ Infraestructura | Scripts **PowerShell** (setup, deploy, sync, monitor, tunnel) + `cloudflared` + Windows Service | Producción autogestionada |
 
 ### Estructura del proyecto
 
+```mermaid
+graph TD
+    Root["LABLMA/"] --> FE["frontend/<br/>Next.js 14 + TypeScript"]
+    Root --> BE["backend/<br/>FastAPI"]
+    Root --> Scripts["scripts/<br/>infraestructura"]
+    Root --> Boot["boot.ps1 / start.ps1<br/>entry points unificados"]
+    Root --> Compose["docker-compose.yml"]
+
+    FE --> Src["src/"]
+    Src --> App["app/<br/>(auth) · (dashboard)"]
+    Src --> Comp["components/<br/>UI + layout + por módulo"]
+    Src --> Hooks["hooks/<br/>useAuth, useDocumentos..."]
+    Src --> Lib["lib/<br/>api.ts · auth.ts · utils.ts"]
+    Src --> Types["types/<br/>interfaces TS compartidas"]
+
+    BE --> Alembic["alembic/<br/>migraciones"]
+    BE --> AppBE["app/"]
+    AppBE --> Auth["auth/<br/>router + JWT"]
+    AppBE --> Models["models/<br/>10 modelos SQLAlchemy"]
+    AppBE --> Schemas["schemas/<br/>Pydantic"]
+    AppBE --> Routers["routers/<br/>8 routers · ~40 endpoints"]
+    AppBE --> Services["services/<br/>email · whatsapp · pdf · scheduler"]
+    AppBE --> Templates["templates/pdf/<br/>Jinja2"]
+    AppBE --> Seed["seed.py<br/>datos demo"]
+
+    Scripts --> Infra["infra/"]
+    Infra --> Setup["setup.ps1 · wizard instalación"]
+    Infra --> Network["network.ps1 · IP LAN + firewall"]
+    Infra --> Deploy["deploy.ps1 · pipeline"]
+    Infra --> Sync["sync.ps1 · comandos Git"]
+    Infra --> TunnelPs["tunnel.ps1 · Cloudflare"]
+    Infra --> MonitorPs["monitor.ps1 · health + git poller"]
+    Infra --> Webhook["webhook-server.py"]
+
+    style Root fill:#0F766E33,stroke:#0F766E
+    style FE fill:#2563EB22,stroke:#2563EB
+    style BE fill:#0F766E22,stroke:#0F766E
+    style Scripts fill:#f59e0b22,stroke:#f59e0b
 ```
-LABLMA/
-├── frontend/                  # Next.js 14 (App Router) + TypeScript
-│   └── src/
-│       ├── app/                # Rutas: grupos (auth) y (dashboard)
-│       ├── components/         # Componentes UI, layout y por módulo
-│       ├── hooks/               # useAuth, useDocumentos, etc.
-│       ├── lib/                  # api.ts, auth.ts, utils.ts
-│       └── types/                 # Interfaces TypeScript compartidas
-├── backend/                   # FastAPI
-│   ├── alembic/                 # Migraciones de base de datos
-│   └── app/
-│       ├── auth/                 # Router y lógica de autenticación (JWT)
-│       ├── models/               # 10 modelos SQLAlchemy (usuario, documento, NC, riesgo, planes...)
-│       ├── schemas/              # Esquemas Pydantic (request/response)
-│       ├── routers/              # 8 routers (~40 endpoints) bajo /api/v1
-│       ├── services/             # email, whatsapp, pdf, scheduler, libreoffice
-│       ├── templates/pdf/        # Plantillas Jinja2 para generación de PDF
-│       ├── seed.py               # Datos demo (usuarios, documentos, NC de ejemplo)
-│       ├── config.py              # Configuración vía variables de entorno
-│       └── main.py                # Entry point de la app FastAPI
-├── scripts/
-│   ├── infra/                   # Sistema de infraestructura y auto-deploy
-│   │   ├── setup.ps1              # Wizard de instalación (1 comando)
-│   │   ├── network.ps1            # Detección de IP LAN + reglas de firewall
-│   │   ├── deploy.ps1             # Pipeline de despliegue
-│   │   ├── sync.ps1               # Comandos de sincronización Git
-│   │   ├── tunnel.ps1             # Gestión de Cloudflare Tunnel
-│   │   ├── monitor.ps1            # Health check + auto-restart + git poller
-│   │   ├── webhook-server.py     # Receptor de webhooks de GitHub
-│   │   └── config.json            # Configuración central de infraestructura
-│   ├── start-server.ps1          # Arranque de producción
-│   ├── stop-server.ps1           # Detención de servicios
-│   ├── install-service.ps1       # Instalación como servicio de Windows
-│   └── backup.ps1                # Backup de la base de datos
-├── boot.ps1 / start.ps1          # Puntos de entrada unificados (dev / infra / status)
-├── docker-compose.yml            # PostgreSQL + backend + frontend en contenedores
-└── package.json                  # Scripts npm orquestadores (raíz)
-```
-
-### Requisitos previos
-
-Para desarrollo local:
-
-- **Python** 3.12+ (con `venv`)
-- **Node.js** 20+
-- **Git**
-
-Para el setup de producción en servidor propio (opcional):
-
-- Windows 10/11 o Windows Server 2019+
-- 2 GB RAM como mínimo (se recomienda almacenamiento NVMe para 30-50 usuarios concurrentes)
-- PowerShell 5.1+ ejecutado como Administrador
-- (Opcional) Cuenta de Cloudflare para el túnel de acceso externo
-
-### Instalación y configuración
-
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/jackson1939/LABLMA.git
-cd LABLMA
-
-# 2. Backend: entorno virtual y dependencias
-cd backend
-python -m venv venv
-.\venv\Scripts\pip install -r requirements.txt
-cd ..
-
-# 3. Frontend: dependencias
-cd frontend
-npm install
-cd ..
-
-# 4. Raíz: dependencias del orquestador (concurrently)
-npm install
-```
-
-**Configurar variables de entorno:**
-
-```bash
-copy .env.example backend\.env
-copy frontend\.env.local.example frontend\.env.local
-```
-
-Por defecto el backend usa SQLite (sin configuración adicional). Para usar PostgreSQL, editar `DATABASE_URL` en `backend\.env` (ver sección [Variables de entorno](#variables-de-entorno)).
-
-### Uso
-
-**Arrancar todo con un solo comando** (migraciones → seed → backend con hot-reload → frontend, en paralelo):
-
-```bash
-npm run dev
-```
-
-| URL | Descripción |
-|-----|-------------|
-| http://localhost:3000 | Aplicación web |
-| http://localhost:8000/docs | Documentación interactiva de la API (Swagger) |
-| http://localhost:8000/redoc | Documentación de la API (ReDoc) |
-
-**Usuarios de demostración** (creados por `npm run seed`):
-
-| Email | Contraseña | Rol |
-|-------|-----------|-----|
-| admin@sgc.local | Admin1234! | Administrador |
-| director@sgc.local | Director1234! | Director |
-| responsable@sgc.local | Resp1234! | Responsable |
-| verificador@sgc.local | Verif1234! | Verificador |
-| elaborador@sgc.local | Elab1234! | Elaborador |
-
-> Cambiar estas credenciales antes de exponer cualquier instancia fuera de un entorno local de pruebas.
-
-**Otros comandos útiles:**
-
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev:backend` | Solo backend (uvicorn con `--reload`) |
-| `npm run dev:frontend` | Solo frontend (`next dev`) |
-| `npm run migrate` | Ejecuta migraciones (Alembic) |
-| `npm run seed` | Pobla la base de datos con datos demo |
-| `npm run status` | Muestra el estado de backend/frontend/servicio |
-| `npm run backup` | Backup de la base de datos |
 
 ### API REST
 
@@ -286,353 +398,403 @@ Prefijo base: `/api/v1`. Documentación interactiva autogenerada en `/docs` (Swa
 
 **Autenticación:** JWT Bearer token, obtenido en `POST /auth/login` y enviado en el header `Authorization: Bearer <token>`.
 
-**Jerarquía de roles:** `admin` > `director` > `responsable` > `verificador` > `elaborador` > `consultor`.
+### Infraestructura de producción
 
-### Despliegue en producción
+LABLMA no corre sobre un PaaS: el repositorio incluye un stack completo de infraestructura para operar de forma autónoma en un servidor Windows propio.
 
-El repositorio incluye un stack completo de infraestructura para correr LABLMA de forma autónoma en un servidor Windows propio, con acceso en LAN y, opcionalmente, expuesto a internet:
-
-```powershell
-# PowerShell como Administrador, en la carpeta del proyecto:
-npm run infra:setup
-```
-
-El wizard guía paso a paso: verificación de requisitos → configuración de red y firewall → entorno Python → build de frontend → migraciones y seed → instalación como servicio de Windows (`SGC-Server`) → configuración de auto-deploy vía Git → (opcional) Cloudflare Tunnel para acceso externo sin abrir puertos.
-
-Una vez configurado:
-
-```powershell
-npm start   # Inicia el servidor en modo producción
-```
-
-**Auto-deploy desde GitHub:** al hacer `git push` desde cualquier equipo, un monitor en el servidor detecta el cambio, ejecuta `git pull`, corre migraciones, reconstruye el frontend y reinicia los servicios automáticamente:
-
-```bash
-npm run sync          # add + commit + push (interactivo)
-npm run sync:status   # ver estado del repositorio
-npm run sync:log      # ver historial de despliegues
-```
-
-Comandos de infraestructura disponibles: `infra:start`, `infra:deploy`, `infra:monitor`, `infra:tunnel:install|login|create|start|stop|status|uninstall`, `infra:webhook:start`. El detalle completo de cada uno está documentado en los propios scripts bajo `scripts/infra/`.
-
-### Docker
-
-Alternativa a la infraestructura basada en PowerShell, útil para desarrollo o despliegue en Linux:
-
-```bash
-docker-compose up --build
-```
-
-Esto levanta PostgreSQL, backend (con migraciones y seed automáticos) y frontend en contenedores separados. Ajustar puertos y variables en `docker-compose.yml` según necesidad.
-
-### Variables de entorno
-
-**Backend** (`backend/.env`, ver plantilla en `.env.example`):
-
-| Variable | Descripción | Default |
-|----------|-------------|---------|
-| `DATABASE_URL` | Cadena de conexión a la base de datos | `sqlite+aiosqlite:///../data/sgc.db` |
-| `SECRET_KEY` | Clave secreta para firmar JWT (mínimo 32 caracteres) | — |
-| `ALGORITHM` | Algoritmo de firma JWT | `HS256` |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | Minutos de expiración del token | `480` |
-| `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASSWORD` / `SMTP_FROM` | Configuración del servidor de correo saliente | — |
-| `WHATSAPP_TOKEN` / `WHATSAPP_PHONE_NUMBER_ID` / `WHATSAPP_TEMPLATE_NC` / `WHATSAPP_TEMPLATE_DOC` | Credenciales y plantillas de WhatsApp Cloud API (Meta) | — |
-| `FRONTEND_URL` | URL del frontend, usada para CORS | `http://localhost:3000` |
-| `ENVIRONMENT` | `development` / `production` | `development` |
-| `CRON_SECRET` | Token para proteger el endpoint del scheduler | — |
-
-**Frontend** (`frontend/.env.local`, ver plantilla en `.env.local.example`):
-
-| Variable | Descripción | Default |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_API_URL` | URL base de la API | `/api/v1` (relativa, vía proxy de Next.js) |
-| `NEXT_PUBLIC_APP_NAME` | Nombre visible de la aplicación | `SGC - Sistema de Gestión de Calidad` |
-
-> Ninguna variable sensible real está incluida en el repositorio; `.env.example` solo documenta las claves esperadas.
+- **Instalación guiada por wizard**: verificación de requisitos → configuración de red y firewall → entorno Python → build de frontend → migraciones y seed → instalación como servicio de Windows (`SGC-Server`) → auto-deploy vía Git → Cloudflare Tunnel opcional.
+- **Auto-deploy real desde GitHub**: un monitor en el servidor detecta cada `git push` a `main`, ejecuta `git pull`, corre migraciones, reconstruye el frontend y reinicia los servicios automáticamente — sin pipeline de CI externo.
+- **Monitor de salud**: health-check continuo con auto-restart si el backend o el frontend caen.
+- **Acceso externo sin abrir puertos**: Cloudflare Tunnel expone `lablma.com` sin exponer directamente la IP ni el router del servidor.
+- **Docker Compose** disponible como alternativa para desarrollo o despliegue en Linux, levantando PostgreSQL + backend + frontend en contenedores separados.
 
 ### Estado del proyecto y roadmap
 
-El proyecto está en un estado **funcional / uso interno activo**: cuenta con los seis módulos de negocio implementados end-to-end (frontend + backend + base de datos + notificaciones), migraciones versionadas con Alembic, datos de demostración, y un stack de infraestructura propio ya en uso para desplegar en un servidor real con dominio (`lablma.com`) y túnel Cloudflare. No es un prototipo: incluye autenticación, control de permisos por rol, generación de PDF, notificaciones multicanal y auto-deploy productivo.
+El proyecto está en un estado **funcional, en producción activa**:
 
-Áreas naturales de evolución (no confirmadas como roadmap oficial, inferidas del código):
+- [x] Los seis módulos de negocio implementados end-to-end (frontend + backend + base de datos + notificaciones).
+- [x] Migraciones versionadas con Alembic.
+- [x] Datos de demostración vía seed.
+- [x] Autenticación JWT y control de permisos por rol (6 roles).
+- [x] Generación de PDF de documentos y reportes.
+- [x] Notificaciones multicanal (in-app, email, WhatsApp).
+- [x] Stack de infraestructura propio, en uso real con dominio (`lablma.com`) y túnel Cloudflare.
+- [x] Auto-deploy productivo desde GitHub.
 
-- Suite de tests automatizados (no se detectaron directorios `tests/` en frontend o backend).
-- CI/CD basado en GitHub Actions como alternativa/complemento al monitor de despliegue por polling.
-- Empaquetado de la infraestructura de producción para plataformas distintas de Windows.
+Áreas naturales de evolución (inferidas del código, no un roadmap oficial confirmado):
+
+- [ ] Suite de tests automatizados (no se detectaron directorios `tests/` en frontend o backend).
+- [ ] CI/CD basado en GitHub Actions como alternativa/complemento al monitor de despliegue por polling.
+- [ ] Empaquetado de la infraestructura de producción para plataformas distintas de Windows.
 
 ### Licencia
 
-No se encontró un archivo `LICENSE` en el repositorio al momento de escribir este documento. Por lo tanto, y salvo indicación posterior por parte del autor, aplica **"Todos los derechos reservados"** — proyecto de jackson1939, sin una licencia open-source formal publicada.
+No se encontró un archivo `LICENSE` en el repositorio. Por lo tanto, aplica **"Todos los derechos reservados"** — proyecto de jackson1939, sin una licencia open-source formal publicada.
 
-> Si la intención es distribuir el proyecto como open-source (por ejemplo bajo MIT, como se mencionaba en una versión anterior de este documento), se recomienda agregar un archivo `LICENSE` en la raíz del repositorio para que ese permiso sea legalmente explícito.
+### Autor
 
-### Autor / Contacto
-
-Desarrollado y mantenido por **[jackson1939](https://github.com/jackson1939)**.
+<p align="left">
+  <a href="https://github.com/jackson1939"><img src="https://img.shields.io/badge/GitHub-jackson1939-181717?style=for-the-badge&logo=github&logoColor=white"/></a>
+</p>
 
 ¿Preguntas, reportes de bugs o propuestas de mejora? Abrí un [issue](https://github.com/jackson1939/LABLMA/issues) en este repositorio.
 
 ---
 
 <a name="english"></a>
+## 🇬🇧 English
 
-## English
+### 📑 Table of contents
 
-### Table of contents
-
-- [Overview](#overview)
+- [What is LABLMA?](#what-is-lablma)
+- [Architecture](#architecture)
+- [Document approval flow](#document-approval-flow)
+- [Data model](#data-model)
 - [Key features](#key-features)
 - [Tech stack](#tech-stack)
-- [Architecture](#architecture)
 - [Project structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Installation & setup](#installation--setup)
-- [Usage](#usage)
 - [REST API](#rest-api)
-- [Production deployment](#production-deployment)
-- [Docker](#docker-1)
-- [Environment variables](#environment-variables)
-- [Project status & roadmap](#project-status--roadmap)
+- [Production infrastructure](#production-infrastructure)
+- [Project status and roadmap](#project-status-and-roadmap)
 - [License](#license)
-- [Author / Contact](#author--contact)
+- [Author](#author)
 
 ---
 
-### Overview
+### What is LABLMA?
 
-**LABLMA (SGC)** is a full-stack Quality Management System (QMS) web application that digitizes the processes required by standards such as ISO 9001, ISO 17025, ISO 14001 and ISO 45001: document control, non-conformance management, risk analysis, action plans and improvement programs, plus executive reporting through a real-time KPI dashboard.
+**LABLMA** is a full-stack Quality Management System (QMS) web application that digitizes, end to end, the processes required by **ISO 9001** (quality management), **ISO 17025** (testing and calibration laboratory competence), **ISO 14001** (environmental management) and **ISO 45001** (occupational health and safety).
 
-It targets organizations that currently run their QMS on spreadsheets or shared folders — SMEs, testing/calibration laboratories, and certification bodies — that need traceability, version control and auditable approval workflows, without the recurring cost of a SaaS quality suite.
+In most SMEs, testing/calibration labs and certification bodies, the QMS lives scattered across shared folders, spreadsheets and loose emails: master document lists in Excel, non-conformances logged in Word, risk matrices nobody updates, and action plans with no traceability of who approved what and when. That is exactly what breaks any serious external audit.
 
-Beyond the application itself, the repository ships a **self-contained infrastructure stack** (PowerShell scripts) to deploy and keep the system running autonomously on a self-hosted Windows server, with GitHub auto-deploy and external access via Cloudflare Tunnel — built for organizations without a dedicated DevOps team.
+LABLMA replaces that archipelago of files with a single application that provides:
 
-### Key features
+- **Real traceability** — every document, non-conformance, risk and plan is tied to a user, a role and a timestamp, with full version and state-change history.
+- **Auditable approval workflows** — nothing moves from draft to effective without going through the right roles; who approved, who rejected and why is always recorded.
+- **Live executive reporting** — a real-time KPI dashboard with charts and due-date alerts, instead of a manual monthly report assembled by hand.
+- **Multi-channel notifications** — the system proactively alerts stakeholders in-app, by email and by WhatsApp whenever something needs attention.
 
-- **Document management** with a full lifecycle: `draft → under review → effective → obsolete`. Includes version control, a master document list, a WYSIWYG editor (TipTap) with autosave, change history, and a multi-role approval workflow.
-- **Non-conformances (NC)** driven by a state machine: `open → analysis → plan approved → in progress → closed / overdue`. Linked corrective actions and automatic due-date alerts.
-- **Risk management** via a probability (1-5) × impact (1-5) = level (1-25) matrix, with a visual heat map, treatment plans and automatic severity classification.
-- **Plans & programs** tied to an ISO standard and fiscal year, with a Gantt-style chart (tasks, owners, dates, 0-100% progress) and multi-role approval.
-- **Executive dashboard** with real-time KPIs, pie charts (NCs by type) and bar charts (documents by status), upcoming-deadline alerts, and auto-refresh.
-- **Multi-channel notifications**: in-app (bell icon with counter), email (SMTP via `fastapi-mail`), and WhatsApp (Meta Cloud API) — triggered when an NC is assigned, a document is approved, or a deadline approaches.
-- **Users & roles**: 6 roles with a granular permission matrix (`admin`, `director`, `responsable`, `verificador`, `elaborador`, `consultor`), with user CRUD restricted to admins.
-- **PDF generation** for documents and reports via WeasyPrint + Jinja2.
-- **Scheduled jobs** (due-date reminders, cleanup, etc.) powered by APScheduler, also triggerable through a protected endpoint for external cron providers (e.g. Vercel Cron).
-- **Self-managed infrastructure**: one-command install wizard, Windows Service with automatic startup, a health monitor with auto-restart, GitHub push-triggered auto-deploy, and a Cloudflare Tunnel to expose the system to the internet without opening router ports.
+This is not a generic project-management tool with a "quality" label slapped on: the business states, roles, supported standards and notification templates are modeled specifically around the lifecycle a certifiable QMS requires. And it is not a portfolio prototype — **it runs in real production** at `lablma.com`, on self-hosted infrastructure with auto-deploy, serving an organization that manages its actual quality system there right now.
+
+### Architecture
+
+LABLMA follows a classic three-tier architecture, with **Next.js** as the frontend (also acting as a proxy to the API), a domain-modular **FastAPI** backend, and **PostgreSQL** as the production database (with SQLite as a lightweight development alternative). The notification system and task scheduler live inside the backend itself, with no external queues or brokers.
+
+```mermaid
+graph TB
+    subgraph Client["🌐 Client"]
+        Browser["Browser<br/>lablma.com"]
+    end
+
+    subgraph Frontend["▲ Next.js · App Router"]
+        Pages["Pages + React<br/>Server Components"]
+        Rewrites["API Rewrites<br/>/api/* → backend"]
+        Static["Static Assets"]
+    end
+
+    subgraph Backend["⚡ FastAPI · /api/v1"]
+        Auth["Auth<br/>JWT · roles"]
+        Docs["Documents<br/>versioning + PDF"]
+        NC["Non-conformances<br/>state machine"]
+        Risk["Risks<br/>P×I matrix"]
+        Plans["Plans / Programs<br/>Gantt"]
+        Dash["Dashboard<br/>KPIs"]
+        Notif["Notifications<br/>in-app · email · WhatsApp"]
+        Sched["Scheduler<br/>APScheduler"]
+    end
+
+    subgraph Data["💾 Persistence"]
+        PG[("PostgreSQL 15<br/>production")]
+        SQLite[("SQLite<br/>development")]
+    end
+
+    subgraph External["📡 External services"]
+        SMTP["SMTP<br/>fastapi-mail"]
+        WA["WhatsApp<br/>Meta Cloud API"]
+        Cron["External cron<br/>e.g. Vercel Cron"]
+    end
+
+    Browser -->|HTTPS| Pages
+    Pages --> Rewrites
+    Browser --> Static
+    Rewrites -->|server-side proxy| Auth
+
+    Auth --- Docs
+    Auth --- NC
+    Auth --- Risk
+    Auth --- Plans
+    Auth --- Dash
+    Auth --- Notif
+    Auth --- Sched
+
+    Docs -->|async SQLAlchemy| PG
+    NC --> PG
+    Risk --> PG
+    Plans --> PG
+    Dash --> PG
+    Notif --> PG
+    PG -.dev.-> SQLite
+
+    Notif --> SMTP
+    Notif --> WA
+    Cron -->|GET protected by cron_secret| Sched
+    Sched --> PG
+
+    style Frontend fill:#2563EB22,stroke:#2563EB
+    style Backend fill:#0F766E22,stroke:#0F766E
+    style Data fill:#f59e0b22,stroke:#f59e0b
+    style External fill:#94a3b822,stroke:#64748b
+```
+
+> The frontend never calls the API directly from the browser: every request goes through `/api/*` in Next.js, which proxies server-side to FastAPI. This avoids exposing the backend on a separate domain/port and simplifies CORS and session cookies.
+
+**Production infrastructure (self-hosted, no PaaS):**
+
+```mermaid
+graph LR
+    subgraph Server["🖥️ Dedicated Windows server"]
+        BE["FastAPI backend<br/>:8000"]
+        FE["Next.js frontend<br/>:3000"]
+        Monitor["Monitor<br/>health-check + git poller"]
+        Svc["Windows Service<br/>SGC-Server · auto-start"]
+        Svc --- BE
+        Svc --- FE
+        Monitor -.watches.-> BE
+        Monitor -.watches.-> FE
+    end
+
+    subgraph Net["Access"]
+        LAN["LAN<br/>192.168.x.x"]
+        Tunnel["Cloudflare Tunnel<br/>no open ports"]
+    end
+
+    GH["GitHub<br/>git push to main"] -->|detects change| Monitor
+    Monitor -->|git pull + migrate + build + restart| BE
+    Monitor --> FE
+
+    LAN --> Server
+    Internet(("🌍 Internet<br/>lablma.com")) --> Tunnel --> Server
+
+    style Server fill:#0F766E22,stroke:#0F766E
+    style Net fill:#2563EB22,stroke:#2563EB
+```
+
+### Document approval flow
+
+The heart of document control is this lifecycle: nothing reaches `effective` without going through explicit review and approval, and every transition is recorded in the document's history.
+
+```mermaid
+sequenceDiagram
+    actor E as Drafter
+    participant Sys as LABLMA
+    actor V as Verifier
+    actor D as Director
+    actor All as Users (read)
+
+    E->>Sys: Creates document (state = draft)
+    Sys->>Sys: Saves version 1 + autosave (TipTap)
+    E->>Sys: POST /{id}/enviar-revision
+    Sys->>Sys: state = under_review
+    Sys-->>V: In-app + email notification
+
+    alt Approved
+        V->>Sys: POST /{id}/aprobar
+        Sys->>Sys: state = effective
+        Sys->>Sys: Records version, author and date in history
+        Sys-->>All: Document visible in master list
+    else Rejected
+        V->>Sys: POST /{id}/rechazar (with reason)
+        Sys->>Sys: state = draft
+        Sys-->>E: Rejection notification + reason
+        E->>Sys: Fixes and resubmits for review
+    end
+
+    D->>Sys: POST /{id}/dar-de-baja (when applicable)
+    Sys->>Sys: state = obsolete
+    Sys-->>All: Document removed from the effective list, historical version preserved
+```
+
+### Data model
+
+The domain is backed by 10 SQLAlchemy models. The diagram below summarizes the core entities and their relationships:
+
+```mermaid
+erDiagram
+    USUARIO ||--o{ DOCUMENTO : "drafts / approves"
+    USUARIO ||--o{ NO_CONFORMIDAD : "reports / analyzes"
+    USUARIO ||--o{ PLAN_PROGRAMA : "approves"
+
+    DOCUMENTO ||--o{ VERSION_DOCUMENTO : "has versions"
+    DOCUMENTO ||--o{ HISTORIAL_DOCUMENTO : "logs changes"
+
+    NO_CONFORMIDAD ||--o{ PLAN_ACCION : "generates"
+
+    PLAN_PROGRAMA ||--o{ TAREA_PLAN : "made up of"
+
+    RIESGO {
+        int id PK
+        string descripcion
+        int probabilidad "1-5"
+        int impacto "1-5"
+        int nivel "probability x impact, 1-25"
+        string estado "active / mitigated / accepted"
+    }
+
+    DOCUMENTO {
+        int id PK
+        string codigo
+        string titulo
+        string norma_iso
+        string estado "draft / under_review / effective / obsolete"
+        int elaborado_por FK
+        int aprobado_por FK
+    }
+
+    NO_CONFORMIDAD {
+        int id PK
+        string descripcion
+        string estado "open / analysis / plan_approved / in_progress / closed / overdue"
+        date fecha_vencimiento
+    }
+
+    PLAN_PROGRAMA {
+        int id PK
+        string norma_iso
+        int anio_fiscal
+        string estado "draft / approved / in_progress / completed"
+    }
+
+    NOTIFICACION {
+        int id PK
+        int usuario_id FK
+        string canal "in_app / email / whatsapp"
+        boolean leida
+    }
+```
+
+> Simplified schema based on `backend/app/models/`. Each entity's states are the real ones from the code (see state machines below), not a generic approximation.
 
 #### Business state machines
 
 ```
 Document:        draft → under_review → effective → obsolete
 Non-conformance: open → analysis → plan_approved → in_progress → closed / overdue
-Action plan:      pending → in_progress → completed
-Risk:              active → mitigated → accepted
-Plan/Program:      draft → approved → in_progress → completed
+Action plan:     pending → in_progress → completed
+Risk:            active → mitigated → accepted
+Plan/Program:    draft → approved → in_progress → completed
 ```
+
+### Key features
+
+**📄 Document control**
+- Full lifecycle `draft → under review → effective → obsolete`, with a master document list linked to a code and ISO standard.
+- WYSIWYG editor (**TipTap**) with tables, images, links, autosave and change history.
+- Version control: every approval generates a new traceable version, with author and date.
+- **Multi-role** approval workflow: submit for review, approve, reject with reason, and retire to obsolete.
+- **PDF generation** for documents and reports via WeasyPrint + Jinja2 templates.
+
+**⚠️ Non-conformances (NC)**
+- State machine `open → analysis → plan approved → in progress → closed / overdue`.
+- Linked corrective actions (`planes_accion`), tracked independently for progress.
+- Automatic due-date alerts triggered by the scheduler.
+
+**📊 Risk matrix**
+- Evaluation via **probability (1-5) × impact (1-5) = level (1-25)**.
+- Visual heat map for immediate prioritization.
+- Treatment plans and automatic severity classification.
+
+**🗓️ Plans and programs**
+- Tied to a specific ISO standard and fiscal year.
+- **Gantt-style** view: tasks, owners, dates and 0-100% progress.
+- Multi-role approval before moving into execution.
+
+**📈 Executive dashboard**
+- Real-time KPIs, pie charts (NCs by type) and bar charts (documents by status) with **Recharts**.
+- Upcoming-deadline alerts and auto-refresh with no manual intervention.
+
+**🔔 Multi-channel notifications**
+- **In-app**: bell icon with unread counter.
+- **Email**: SMTP via `fastapi-mail`.
+- **WhatsApp**: Meta Cloud API, with dedicated templates for NCs and documents.
+- Triggered automatically when an NC is assigned, a document is approved, or a deadline approaches.
+
+**👥 Users and roles**
+- 6 roles with a granular permission matrix: `admin`, `director`, `responsable`, `verificador`, `elaborador`, `consultor`.
+- User CRUD restricted to admins.
+- Role hierarchy: `admin` > `director` > `responsable` > `verificador` > `elaborador` > `consultor`.
+
+**⏱️ Automation**
+- Scheduled jobs (due-date reminders, cleanup) powered by **APScheduler**.
+- Protected endpoint (`cron_secret`) to trigger the scheduler from an external cron provider (e.g. Vercel Cron), useful when the Python process doesn't run 24/7 on the same host.
+
+**🖥️ Self-managed infrastructure**
+- Custom PowerShell stack: install wizard, Windows Service with automatic startup, health monitor with auto-restart.
+- **Auto-deploy**: on `git push`, a monitor on the server detects the change, runs `git pull`, applies migrations, rebuilds the frontend, and restarts services — no manual intervention.
+- **Cloudflare Tunnel** to expose the system to the internet without opening router ports.
 
 ### Tech stack
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| **Frontend** | Next.js (App Router) + TypeScript | 14.2 / 5.4 |
-| **Styling** | Tailwind CSS + class-variance-authority | 3.4 |
-| **Rich text editor** | TipTap (table, image, link extensions, etc.) | 3.27 |
-| **Charts** | Recharts | 2.12 |
-| **Icons** | Lucide React | 0.378 |
-| **HTTP client (frontend)** | Axios | 1.7 |
-| **Backend** | FastAPI + Python | 0.111 / 3.12 |
-| **ORM** | SQLAlchemy 2.0 (async) + Alembic (migrations) | 2.0 / 1.13 |
-| **Validation** | Pydantic + Pydantic Settings | 2.7 / 2.3 |
-| **Database** | PostgreSQL 15 (production) / SQLite + aiosqlite (development) | |
-| **Authentication** | JWT (HS256) via `python-jose` + `bcrypt`/`passlib` | configurable expiry (default 8h) |
-| **PDF generation** | WeasyPrint + Jinja2 | |
-| **Notifications** | SMTP (`fastapi-mail`) + WhatsApp Cloud API (Meta) | |
-| **HTTP client (backend)** | httpx | |
-| **Scheduled jobs** | APScheduler | 3.10 |
-| **Containers** | Docker + Docker Compose | |
-| **Infrastructure** | PowerShell scripts (setup, deploy, sync, monitor, tunnel) + cloudflared + Windows Service | |
-
-### Architecture
-
-```
-┌────────────────────────────────────────────────────────┐
-│                       BROWSER                            │
-│           http://localhost:3000 / https://lablma.com    │
-└─────────────────────┬──────────────────────────────────┘
-                       │  /api/* → same-origin proxy
-                       │  / → React Server Components
-┌─────────────────────▼──────────────────────────────────┐
-│                 NEXT.JS (App Router)                     │
-│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐    │
-│  │ Pages        │  │ API Rewrites │  │ Static Assets │   │
-│  │ + RSC        │  │ /api/* → BE  │  │               │   │
-│  └─────────────┘  └──────┬───────┘  └──────────────┘    │
-└──────────────────────────┼──────────────────────────────┘
-                            │  server-side proxy
-┌──────────────────────────▼──────────────────────────────┐
-│                  FASTAPI (Backend)                        │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │
-│  │ Auth     │ │ Docs     │ │ NC       │ │ Risks    │    │
-│  │ /auth    │ │ /docs.   │ │ /nc      │ │ /riesgos │    │
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │
-│  │ Plans    │ │ Dashboard│ │ Notif.   │ │ Scheduler│    │
-│  │ /planes  │ │ /kpis    │ │ /notif   │ │ APSch.   │    │
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
-└──────────────────────┬────────────────────────────────┘
-                        │  SQLAlchemy async
-┌──────────────────────▼────────────────────────────────┐
-│                     DATABASE                             │
-│         SQLite (dev) / PostgreSQL 15 (prod)             │
-└──────────────────────────────────────────────────────────┘
-```
-
-**Production infrastructure (self-hosted Windows server):**
-
-```
-┌──────────────────────────────────────────────────┐
-│  SERVER (Windows)                                 │
-│                                                    │
-│  ┌────────┐  ┌────────┐  ┌──────────┐  ┌──────┐  │
-│  │Backend │  │Frontend│  │ Monitor  │  │Tunnel│  │
-│  │:8000   │  │:3000   │  │health+git│  │CF    │  │
-│  └────────┘  └────────┘  └──────────┘  └──────┘  │
-│                                                    │
-│  ┌──────────────────────────────────────────────┐ │
-│  │ Windows Service (SGC-Server, auto-start)      │ │
-│  └──────────────────────────────────────────────┘ │
-└──────────────────┬───────────────────────────────┘
-                    │
-      ┌─────────────┴──────────────┐
-      │  LAN            │ Internet │
-      │  192.168.x.x    │  CF      │
-      │  WiFi           │  Tunnel  │
-      └─────────────────────────────┘
-```
+| Layer | Technology | Detail |
+|---|---|---|
+| 🎨 Frontend | **Next.js 14** (App Router) + **TypeScript** | React Server Components, grouped routes `(auth)` / `(dashboard)` |
+| 💅 Styling | **Tailwind CSS** + class-variance-authority | Utility-first design system |
+| ✏️ Rich text editor | **TipTap** | Tables, images, links, autosave |
+| 📊 Charts | **Recharts** | Pie and bar charts in the dashboard |
+| 🎯 Icons | Lucide React | Consistent icon set |
+| 🌐 HTTP (frontend) | Axios | Client for `/api/v1` |
+| ⚡ Backend | **FastAPI** + **Python 3.12** | Async API under `/api/v1` |
+| 🗃️ ORM | **SQLAlchemy 2.0** (async) + **Alembic** | Versioned migrations |
+| ✅ Validation | **Pydantic** + Pydantic Settings | Request/response schemas |
+| 🐘 Database | **PostgreSQL 15** (production) / SQLite + aiosqlite (development) | — |
+| 🔐 Authentication | **JWT (HS256)** via `python-jose` + `bcrypt`/`passlib` | Configurable expiry (default 8h) |
+| 📑 PDF | **WeasyPrint** + Jinja2 | Documents and reports |
+| 📬 Notifications | SMTP (`fastapi-mail`) + **WhatsApp Cloud API** (Meta) | Multi-channel |
+| 🌐 HTTP (backend) | httpx | Outgoing calls |
+| ⏰ Scheduled jobs | **APScheduler** | Reminders and cleanup |
+| 🐳 Containers | Docker + Docker Compose | Linux/dev alternative |
+| 🛠️ Infrastructure | **PowerShell** scripts (setup, deploy, sync, monitor, tunnel) + `cloudflared` + Windows Service | Self-managed production |
 
 ### Project structure
 
+```mermaid
+graph TD
+    Root["LABLMA/"] --> FE["frontend/<br/>Next.js 14 + TypeScript"]
+    Root --> BE["backend/<br/>FastAPI"]
+    Root --> Scripts["scripts/<br/>infrastructure"]
+    Root --> Boot["boot.ps1 / start.ps1<br/>unified entry points"]
+    Root --> Compose["docker-compose.yml"]
+
+    FE --> Src["src/"]
+    Src --> App["app/<br/>(auth) · (dashboard)"]
+    Src --> Comp["components/<br/>UI + layout + per-module"]
+    Src --> Hooks["hooks/<br/>useAuth, useDocumentos..."]
+    Src --> Lib["lib/<br/>api.ts · auth.ts · utils.ts"]
+    Src --> Types["types/<br/>shared TS interfaces"]
+
+    BE --> Alembic["alembic/<br/>migrations"]
+    BE --> AppBE["app/"]
+    AppBE --> Auth["auth/<br/>router + JWT"]
+    AppBE --> Models["models/<br/>10 SQLAlchemy models"]
+    AppBE --> Schemas["schemas/<br/>Pydantic"]
+    AppBE --> Routers["routers/<br/>8 routers · ~40 endpoints"]
+    AppBE --> Services["services/<br/>email · whatsapp · pdf · scheduler"]
+    AppBE --> Templates["templates/pdf/<br/>Jinja2"]
+    AppBE --> Seed["seed.py<br/>demo data"]
+
+    Scripts --> Infra["infra/"]
+    Infra --> Setup["setup.ps1 · install wizard"]
+    Infra --> Network["network.ps1 · LAN IP + firewall"]
+    Infra --> Deploy["deploy.ps1 · pipeline"]
+    Infra --> Sync["sync.ps1 · Git commands"]
+    Infra --> TunnelPs["tunnel.ps1 · Cloudflare"]
+    Infra --> MonitorPs["monitor.ps1 · health + git poller"]
+    Infra --> Webhook["webhook-server.py"]
+
+    style Root fill:#0F766E33,stroke:#0F766E
+    style FE fill:#2563EB22,stroke:#2563EB
+    style BE fill:#0F766E22,stroke:#0F766E
+    style Scripts fill:#f59e0b22,stroke:#f59e0b
 ```
-LABLMA/
-├── frontend/                  # Next.js 14 (App Router) + TypeScript
-│   └── src/
-│       ├── app/                # Routes: (auth) and (dashboard) groups
-│       ├── components/         # UI, layout and per-module components
-│       ├── hooks/               # useAuth, useDocumentos, etc.
-│       ├── lib/                  # api.ts, auth.ts, utils.ts
-│       └── types/                 # Shared TypeScript interfaces
-├── backend/                   # FastAPI
-│   ├── alembic/                 # Database migrations
-│   └── app/
-│       ├── auth/                 # Auth router and JWT logic
-│       ├── models/               # 10 SQLAlchemy models (user, document, NC, risk, plans...)
-│       ├── schemas/              # Pydantic request/response schemas
-│       ├── routers/              # 8 routers (~40 endpoints) under /api/v1
-│       ├── services/             # email, whatsapp, pdf, scheduler, libreoffice
-│       ├── templates/pdf/        # Jinja2 templates for PDF generation
-│       ├── seed.py               # Demo data (users, sample documents/NCs)
-│       ├── config.py              # Environment-based settings
-│       └── main.py                # FastAPI application entry point
-├── scripts/
-│   ├── infra/                   # Infrastructure and auto-deploy system
-│   │   ├── setup.ps1              # One-command install wizard
-│   │   ├── network.ps1            # LAN IP detection + firewall rules
-│   │   ├── deploy.ps1             # Deployment pipeline
-│   │   ├── sync.ps1               # Git sync commands
-│   │   ├── tunnel.ps1             # Cloudflare Tunnel management
-│   │   ├── monitor.ps1            # Health check + auto-restart + git poller
-│   │   ├── webhook-server.py     # GitHub webhook receiver
-│   │   └── config.json            # Central infrastructure configuration
-│   ├── start-server.ps1          # Production startup
-│   ├── stop-server.ps1           # Stop services
-│   ├── install-service.ps1       # Install as a Windows Service
-│   └── backup.ps1                # Database backup
-├── boot.ps1 / start.ps1          # Unified entry points (dev / infra / status)
-├── docker-compose.yml            # PostgreSQL + backend + frontend containers
-└── package.json                  # Root orchestration npm scripts
-```
-
-### Prerequisites
-
-For local development:
-
-- **Python** 3.12+ (with `venv`)
-- **Node.js** 20+
-- **Git**
-
-For self-hosted production setup (optional):
-
-- Windows 10/11 or Windows Server 2019+
-- 2 GB RAM minimum (NVMe storage recommended for 30-50 concurrent users)
-- PowerShell 5.1+ run as Administrator
-- (Optional) a Cloudflare account for the external-access tunnel
-
-### Installation & setup
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/jackson1939/LABLMA.git
-cd LABLMA
-
-# 2. Backend: virtual environment and dependencies
-cd backend
-python -m venv venv
-.\venv\Scripts\pip install -r requirements.txt
-cd ..
-
-# 3. Frontend: dependencies
-cd frontend
-npm install
-cd ..
-
-# 4. Root: orchestrator dependencies (concurrently)
-npm install
-```
-
-**Configure environment variables:**
-
-```bash
-copy .env.example backend\.env
-copy frontend\.env.local.example frontend\.env.local
-```
-
-By default the backend uses SQLite (no extra configuration needed). To use PostgreSQL, edit `DATABASE_URL` in `backend\.env` (see [Environment variables](#environment-variables)).
-
-### Usage
-
-**Start everything with a single command** (migrations → seed → backend with hot-reload → frontend, all in parallel):
-
-```bash
-npm run dev
-```
-
-| URL | Description |
-|-----|-------------|
-| http://localhost:3000 | Web application |
-| http://localhost:8000/docs | Interactive API documentation (Swagger) |
-| http://localhost:8000/redoc | API documentation (ReDoc) |
-
-**Demo users** (created by `npm run seed`):
-
-| Email | Password | Role |
-|-------|----------|------|
-| admin@sgc.local | Admin1234! | Administrator |
-| director@sgc.local | Director1234! | Director |
-| responsable@sgc.local | Resp1234! | Owner/Responsible |
-| verificador@sgc.local | Verif1234! | Verifier |
-| elaborador@sgc.local | Elab1234! | Drafter |
-
-> Change these credentials before exposing any instance outside a local test environment.
-
-**Other useful commands:**
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev:backend` | Backend only (uvicorn with `--reload`) |
-| `npm run dev:frontend` | Frontend only (`next dev`) |
-| `npm run migrate` | Run database migrations (Alembic) |
-| `npm run seed` | Seed the database with demo data |
-| `npm run status` | Show backend/frontend/service status |
-| `npm run backup` | Back up the database |
 
 ### REST API
 
@@ -652,88 +814,47 @@ Base prefix: `/api/v1`. Auto-generated interactive docs at `/docs` (Swagger) and
 
 **Authentication:** JWT Bearer token, obtained from `POST /auth/login` and sent in the `Authorization: Bearer <token>` header.
 
-**Role hierarchy:** `admin` > `director` > `responsable` > `verificador` > `elaborador` > `consultor`.
+### Production infrastructure
 
-### Production deployment
+LABLMA does not run on a PaaS: the repository includes a complete infrastructure stack to operate autonomously on a self-hosted Windows server.
 
-The repository includes a complete infrastructure stack to run LABLMA autonomously on a self-hosted Windows server, reachable over LAN and, optionally, exposed to the internet:
+- **Wizard-guided install**: prerequisite checks → network/firewall configuration → Python environment → frontend build → migrations and seed data → installation as a Windows Service (`SGC-Server`) → Git-based auto-deploy → optional Cloudflare Tunnel.
+- **Real GitHub auto-deploy**: a monitor on the server detects every `git push` to `main`, runs `git pull`, applies migrations, rebuilds the frontend, and restarts services automatically — no external CI pipeline.
+- **Health monitor**: continuous health-checking with auto-restart if the backend or frontend go down.
+- **External access without opening ports**: Cloudflare Tunnel exposes `lablma.com` without directly exposing the server's IP or router.
+- **Docker Compose** available as an alternative for development or Linux deployment, bringing up PostgreSQL + backend + frontend as separate containers.
 
-```powershell
-# PowerShell as Administrator, from the project folder:
-npm run infra:setup
-```
+### Project status and roadmap
 
-The wizard walks through: prerequisite checks → network/firewall configuration → Python environment → frontend build → migrations and seed data → installation as a Windows Service (`SGC-Server`) → Git-based auto-deploy configuration → (optional) Cloudflare Tunnel for external access without opening ports.
+The project is in a **functional, actively-in-production** state:
 
-Once configured:
+- [x] All six business modules implemented end-to-end (frontend + backend + database + notifications).
+- [x] Migrations versioned with Alembic.
+- [x] Demo data via seed.
+- [x] JWT authentication and role-based permissions (6 roles).
+- [x] PDF generation for documents and reports.
+- [x] Multi-channel notifications (in-app, email, WhatsApp).
+- [x] Self-built infrastructure stack, in real use with a live domain (`lablma.com`) and Cloudflare Tunnel.
+- [x] Production auto-deploy from GitHub.
 
-```powershell
-npm start   # Starts the server in production mode
-```
+Natural areas for future work (inferred from the code, not a confirmed official roadmap):
 
-**GitHub auto-deploy:** whenever `git push` is run from any machine, a monitor on the server detects the change, runs `git pull`, applies migrations, rebuilds the frontend, and restarts services automatically:
-
-```bash
-npm run sync          # add + commit + push (interactive)
-npm run sync:status   # check repository status
-npm run sync:log      # view deployment history
-```
-
-Additional infrastructure commands: `infra:start`, `infra:deploy`, `infra:monitor`, `infra:tunnel:install|login|create|start|stop|status|uninstall`, `infra:webhook:start`. Full details for each are documented in the scripts themselves under `scripts/infra/`.
-
-### Docker
-
-An alternative to the PowerShell-based infrastructure, useful for local development or Linux deployments:
-
-```bash
-docker-compose up --build
-```
-
-This brings up PostgreSQL, the backend (with automatic migrations and seeding) and the frontend as separate containers. Adjust ports and variables in `docker-compose.yml` as needed.
-
-### Environment variables
-
-**Backend** (`backend/.env`, see the template in `.env.example`):
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `DATABASE_URL` | Database connection string | `sqlite+aiosqlite:///../data/sgc.db` |
-| `SECRET_KEY` | Secret key used to sign JWTs (32+ chars) | — |
-| `ALGORITHM` | JWT signing algorithm | `HS256` |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | Token expiry, in minutes | `480` |
-| `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASSWORD` / `SMTP_FROM` | Outgoing mail server configuration | — |
-| `WHATSAPP_TOKEN` / `WHATSAPP_PHONE_NUMBER_ID` / `WHATSAPP_TEMPLATE_NC` / `WHATSAPP_TEMPLATE_DOC` | WhatsApp Cloud API (Meta) credentials and templates | — |
-| `FRONTEND_URL` | Frontend URL, used for CORS | `http://localhost:3000` |
-| `ENVIRONMENT` | `development` / `production` | `development` |
-| `CRON_SECRET` | Token protecting the scheduler endpoint | — |
-
-**Frontend** (`frontend/.env.local`, see the template in `.env.local.example`):
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_API_URL` | Base API URL | `/api/v1` (relative, via Next.js proxy) |
-| `NEXT_PUBLIC_APP_NAME` | Application display name | `SGC - Sistema de Gestión de Calidad` |
-
-> No real secrets are included in the repository; `.env.example` only documents the expected keys.
-
-### Project status & roadmap
-
-The project is in an **active, functionally complete** state: all six business modules are implemented end-to-end (frontend + backend + database + notifications), migrations are versioned with Alembic, demo data is seeded, and a purpose-built infrastructure stack is already deployed to a real server with a live domain (`lablma.com`) via a Cloudflare Tunnel. This is not a prototype: it includes authentication, role-based permissions, PDF generation, multi-channel notifications, and production auto-deploy.
-
-Natural areas for future work (inferred from the code, not an official roadmap):
-
-- An automated test suite (no `tests/` directories were found in frontend or backend).
-- GitHub Actions-based CI/CD as an alternative or complement to the polling-based deploy monitor.
-- Packaging the production infrastructure for platforms other than Windows.
+- [ ] An automated test suite (no `tests/` directories were found in frontend or backend).
+- [ ] GitHub Actions-based CI/CD as an alternative or complement to the polling-based deploy monitor.
+- [ ] Packaging the production infrastructure for platforms other than Windows.
 
 ### License
 
-No `LICENSE` file was found in the repository at the time of writing. Absent one, and unless the author states otherwise, **"All rights reserved"** applies — this is jackson1939's project, without a formally published open-source license.
+No `LICENSE` file was found in the repository. Absent one, **"All rights reserved"** applies — this is jackson1939's project, without a formally published open-source license.
 
-> If the intent is to distribute the project as open source (e.g. under MIT, as an earlier version of this document stated), adding a `LICENSE` file at the repository root is recommended to make that permission legally explicit.
+### Author
 
-### Author / Contact
-
-Built and maintained by **[jackson1939](https://github.com/jackson1939)**.
+<p align="left">
+  <a href="https://github.com/jackson1939"><img src="https://img.shields.io/badge/GitHub-jackson1939-181717?style=for-the-badge&logo=github&logoColor=white"/></a>
+</p>
 
 Questions, bug reports or feature suggestions? Open an [issue](https://github.com/jackson1939/LABLMA/issues) on this repository.
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2563EB,100:0F766E&height=120&section=footer" width="100%"/>
+</p>
